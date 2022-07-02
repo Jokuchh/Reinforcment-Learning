@@ -1,0 +1,165 @@
+Reinforcement Learning
+
+Lesson 1 - what is it? and how it works?(18.01)
+
+Different section like :
+ - economics : bounded raditionaly
+ - mathematics : operations research 
+ - psychology : classical/operant conditioning
+ - neuroscience : reward system 
+ - computer science : machine learning
+ - engineering : optimal control 
+
+Observation(Ot) ---> Agent(controller) ---> Action(At)
+
+						              ^
+						              |
+					   	            |
+					              Reward(Rt)
+
+Робот make the step (поганий,хороший,ідеальний,не дуже успішний) --> середовище дає reward роботу, every time a reward (a little, big one or whatever) --> observation time --> it will learn how to take more efficient action --> the controller learn what is the best way
+
+Agent :
+	executes action (At)
+	receives observation (Ot)
+	erceives reward (Rt)
+Environment :
+	receives action (At)
+	Emits obesrvation (Ot)
+	Emits scalar reward (Rt + 1)
+
+Rewards :
+  - scalar feedback signal indicate how well an agent does 
+  - agent maximize the cumulative reward with respect to a given goal
+
+Reinforcement learning :
+	find the best way (optinal way) to maximize the cumulative reward with respect to a given goal
+
+Goal --> Select actions thah maximize the total future reward
+
+To note :
+ - immidiate actions may have long term consequences
+ - rewards may be delayed
+ - perhaps 
+
+History : sequences of observation, actions and rewards
+Ht = O1,R1,A1,O2,R2,A2 ...... At-1,Ot,Rt
+Depending on history : 
+ - Agent selects actions
+ - Environment selects observation/rewards
+
+State : info used to determine what happens next.
+State is a function of the history.
+State is a representation of system 
+State St --> Markov Property
+	P = probability  ||  S = State
+	P(St+1 | St) = P(St+1 | S1,S2,....St)
+The future is independent of the past given the present.
+	H1:t --> St --> Ht+1:0
+History is known, throw away the history 
+State is fully capable of describing the 'present' situation pf the system (if u know S0 u can find S1, so S2 depends on S1 --> loop)
+St^e is Markov, Ht is Markov
+
+Markov Decision Process:
+MDP : 4 tuple(S, A, Pa, Ra)
+ - S --> Set of states 
+ - A --> Set of the actions
+ - Pa(S,S') = probability of actions 
+		Pk(St+1 = S' || St = s, At = a) 
+ - Ra(S,S') = immidiate reward
+
+Return Gt -> total discounted reward from time step "t".
+Gt = Rt+1 + GammaRt+2.... = sum infinity up k = 0 down 
+(gamma^k * Rt+k+1)
+Value of reward "R" offers "k+1" time-steps is Gamma^k * R
+2 parts of value function : 
+- immidiate reward Rt+1
+- discounted value of successor state : Gamma V (St+1)
+
+*Grid World Example* - slide with формула а поясненням return and V
+V(S) - long team value of state "S".
+V(S) = IE[Gt || St = S]
+
+Value function
+V(s) = IE[Gt || St = s] = 
+= IE[Rt+1 + Gamma*Rt+2 + Gamma^2Rt+3... || St = S] =
+= IE[Rt+1 + Gamma(Rt+2+GammaRt+3+Gamma^2Rt+4....) || St = S] =
+= IE[Rt+1 + Gamma*Gt+1 || St =S ] = 
+= IE[Rt+1 + Gamma*V (St+1) || St = S]
+
+V(St) = IE[Rt+1 + Gamma*V(St+1) || St = S]
+To know the present u must know the future 
+	Rt+1 = reward at t+1 
+	(St+1) = for any S at t(time) 
+	V*(St+1) = value for any s at time 't' 
+
+  -- This is the Iterative Equation 
+Everything depends on time, time +1, time +2.
+
+But the passage s ------> s'  
+							  St=s      St+1=s
+							  (time t)  (time t'+1)
+
+
+Bellman equation 
+V = R + Gamma * Probability * V (using matrices)
+
+Vector Value = Vector Reward +  Vector Gamma + Matice Probability + Vector Value
+
+State Value Function(V function)
+	V - Function V(S) -> expected 'return' from state 's' and following policy.
+		V Pi(S) = IE Pi[Gt || St = s]
+
+Action Value Function(Q Function)
+	Q - Function -> expected return starting from state 's'
+ taking action 'a' and following policy Pi.
+ 		Q Pi(s,a) = IE Pi[Gt || St = s, At = a]
+
+How to interpret Q Pi?
+Q Pi(s,a) = Ra(s) + Gamma * Sum (S'є S) Pa(s,s') * V Pi(s')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
